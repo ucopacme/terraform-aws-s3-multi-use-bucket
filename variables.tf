@@ -45,8 +45,8 @@ variable "force_destroy" {
 }
 
 variable "versioning_enabled" {
-  type        = bool
-  default     = false
+  type        = string
+  default     = "Disabled"
   description = "A state of versioning. Versioning is a means of keeping multiple variants of an object in the same bucket"
 }
 
@@ -87,8 +87,8 @@ variable "allow_encrypted_uploads_only" {
 }
 
 variable "lifecycle_rule_enabled" {
-  type        = bool
-  default     = false
+  type        = string
+  default     = "Disabled"
   description = "Enable or disable lifecycle rule"
 }
 
