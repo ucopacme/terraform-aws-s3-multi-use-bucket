@@ -2,7 +2,7 @@ resource "aws_s3_bucket" "this" {
   bucket        = var.bucket
   count         = var.enabled ? 1 : 0
   force_destroy = var.force_destroy
-  tags = merge(var.tags, map("Name", var.bucket))
+  tags = merge(var.tags, tomap({"Name" = var.bucket}))
 }
 #
 resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
