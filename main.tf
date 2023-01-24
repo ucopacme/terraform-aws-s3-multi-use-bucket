@@ -29,7 +29,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
   rule {
     id     = var.lifecycle_id
     status = var.lifecycle_rule_enabled
-    prefix  = var.prefix
+    filter {
+      prefix  = var.prefix
+    }
+    
     expiration {
       days = var.expiration_days
     }
