@@ -1,9 +1,3 @@
-variable "acl" {
-  type        = string
-  default     = "private"
-  description = "The [canned ACL](https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) to apply. We recommend `private` to avoid exposing sensitive information. Conflicts with `grants`."
-}
-
 variable "bucket" {
   type        = string
   description = "S3 Bucket name"
@@ -18,18 +12,6 @@ variable "policy_enabled" {
   default     = false
   description = "Set to `false` to prevent the module from creating resources"
   type        = bool
-}
-
-variable "grants" {
-  type = list(object({
-    id          = string
-    type        = string
-    permissions = list(string)
-    uri         = string
-  }))
-  default = null
-
-  description = "An ACL policy grant. Conflicts with `acl`. Set `acl` to `null` to use this."
 }
 
 variable "policy" {
