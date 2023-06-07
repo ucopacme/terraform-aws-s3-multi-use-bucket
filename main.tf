@@ -59,3 +59,10 @@ resource "aws_s3_bucket_policy" "this" {
   policy = var.policy
 }
 
+resource "aws_s3_bucket_ownership_controls" "this" {
+  bucket = join("", aws_s3_bucket.this.*.id)
+  rule {
+    object_ownership = var.object_ownership
+  }
+}
+

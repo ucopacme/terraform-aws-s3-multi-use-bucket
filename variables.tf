@@ -180,3 +180,9 @@ variable "restrict_public_buckets" {
   default     = true
   description = "Set to `false` to disable the restricting of making the bucket public"
 }
+
+variable "object_ownership" {
+  type        = string
+  default     = "BucketOwnerEnforced"
+  description = "Object ownership. Valid values: `BucketOwnerPreferred`, `ObjectWriter` or `BucketOwnerEnforced`"
+}
