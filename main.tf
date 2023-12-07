@@ -32,16 +32,18 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
     filter {
       prefix  = var.prefix
     }
-    
+
     expiration {
       days = var.expiration_days
     }
 
-    transition {
-      days          = var.standard_transition_days
-      storage_class = var.infrequent_access_type
+    dynamic "transition" {
+      for_each = var.enable_standard_ia_transition ? [1] : []
+      content {
+        days          = var.standard_transition_days
+        storage_class = var.infrequent_access_type
+      }
     }
-   
   }
 }
 #
