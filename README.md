@@ -1,14 +1,19 @@
-# terraform-aws-ec2
+# terraform-aws-s3
 Terraform AWS S3 Module
 
 
 -->
 
-Terraform module to provision AWS [`S3`]
+
+```hcl
+
+#
+#
+
+# make sure you deploy the security group before creating ec2 instance, ec2 instance depends on the security group.
 
 
 
-####
 
 data "aws_caller_identity" "current" {}
 
@@ -70,4 +75,3 @@ output "website_domain" {
   value       = module.s3.website_domain
   description = "The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records."
 }
-
