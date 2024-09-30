@@ -147,7 +147,7 @@ variable "expiration_days" {
 
 variable "abort_incomplete_multipart_upload_days" {
   type        = number
-  default     = 5
+  default     = 10
   description = "Maximum time (in days) that you want to allow multipart uploads to remain in progress"
 }
 
