@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "this" {
   force_destroy = var.force_destroy
   tags = merge(var.tags, tomap({"Name" = var.bucket}))
 }
-#
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
   bucket = join("", aws_s3_bucket.this.*.id)
 
@@ -15,14 +15,14 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
     }
   }
 }
-#
+
 resource "aws_s3_bucket_versioning" "this" {
   bucket = join("", aws_s3_bucket.this.*.id)
   versioning_configuration {
     status = var.versioning_enabled
   }
 }
-#
+
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   bucket = join("", aws_s3_bucket.this.*.id)
 
@@ -45,12 +45,19 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
       }
     }
 
+    dynamic "noncurrent_version_expiration" {
+      for_each = var.versioning_enabled ? [1] : []
+      content {
+        noncurrent_days = var.noncurrent_version_expiration_days
+      }
+    }
+
     abort_incomplete_multipart_upload {
       days_after_initiation = var.abort_incomplete_multipart_upload_days
     }
   }
 }
-#
+
 resource "aws_s3_bucket_public_access_block" "this" {
   block_public_acls       = var.block_public_acls
   block_public_policy     = var.block_public_policy
@@ -71,4 +78,3 @@ resource "aws_s3_bucket_ownership_controls" "this" {
     object_ownership = var.object_ownership
   }
 }
-
