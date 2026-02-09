@@ -49,6 +49,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
       for_each = var.versioning_enabled == "Enabled" ? [1] : []
       content {
         noncurrent_days = var.noncurrent_version_expiration_days
+        newer_noncurrent_versions = var.newer_noncurrent_versions != null ? var.newer_noncurrent_versions : null
       }
     }
 

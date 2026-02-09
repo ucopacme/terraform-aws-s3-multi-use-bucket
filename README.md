@@ -10,10 +10,9 @@ Terraform AWS S3 Module
 #
 #
 
-# make sure you deploy the security group before creating ec2 instance, ec2 instance depends on the security group.
+1. (Required) create bucket. Be sure to use unique identifier for bucket name. Typical usage has account number appended using caller identity current account id as below. More details of lifecycle policy and expiration events can be added to README later. For now, review variables.tf and main.tf along with relevant Terraform Registry pages. 
 
-
-
+Special Note: When configuring a lifecycle policy and utilizing both noncurrent_version_expiration_days and newer_noncurrent_versions, BOTH conditions must be true for the lifecycle rule to apply to the object.
 
 data "aws_caller_identity" "current" {}
 

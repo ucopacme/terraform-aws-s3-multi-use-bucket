@@ -86,6 +86,12 @@ variable "noncurrent_version_transition_days" {
   description = "Number of days to persist in the standard storage tier before moving to the glacier tier infrequent access tier"
 }
 
+variable "newer_noncurrent_versions" {
+  type        = number
+  default     = null
+  description = "Number of noncurrent versions Amazon S3 will retain. Must be a non-zero positive integer."
+}
+
 variable "noncurrent_version_expiration_days" {
   type        = number
   default     = 90
