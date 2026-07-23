@@ -9,6 +9,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
   bucket = join("", aws_s3_bucket.this.*.id)
 
   rule {
+    bucket_key_enabled       = var.bucket_key_enabled
+    blocked_encryption_types = var.blocked_encryption_types
+
     apply_server_side_encryption_by_default {
       kms_master_key_id = var.kms_master_key_arn
       sse_algorithm     = var.sse_algorithm

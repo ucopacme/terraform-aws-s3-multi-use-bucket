@@ -44,6 +44,18 @@ variable "kms_master_key_arn" {
   description = "The AWS KMS master key ARN used for the `SSE-KMS` encryption. This can only be used when you set the value of `sse_algorithm` as `aws:kms`. The default aws/s3 AWS KMS master key is used if this element is absent while the `sse_algorithm` is `aws:kms`"
 }
 
+variable "bucket_key_enabled" {
+  type        = bool
+  default     = false
+  description = "Whether to use an S3 Bucket Key for SSE-KMS"
+}
+
+variable "blocked_encryption_types" {
+  type        = list(string)
+  default     = ["SSE-C"]
+  description = "List of encryption types to block. AWS defaults to blocking SSE-C."
+}
+
 variable "tags" {
   default     = {}
   description = "A map of tags to add to all resources"

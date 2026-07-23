@@ -21,7 +21,7 @@ output "account_id" {
 }
 
 module "s3" {
-  source                   = "git::https://git@github.com/ucopacme/terraform-aws-s3-multi-use-bucket.git//?ref=v0.0.4"
+  source                   = "git::https://git@github.com/ucopacme/terraform-aws-s3-multi-use-bucket.git//?ref=v0.0.5"
   bucket                   = join("-", ["server-access-logging", data.aws_caller_identity.current.account_id, "us-west-2"])
   enabled                  = true
   policy                   = file("./policy.json")
