@@ -204,3 +204,21 @@ variable "object_ownership" {
   default     = "BucketOwnerEnforced"
   description = "Object ownership. Valid values: `BucketOwnerPreferred`, `ObjectWriter` or `BucketOwnerEnforced`"
 }
+
+variable "logging_enabled" {
+  type        = bool
+  default     = false
+  description = "Set to `true` to enable S3 server access logging on the bucket"
+}
+
+variable "logging_target_bucket" {
+  type        = string
+  default     = ""
+  description = "The name of the bucket that will receive the S3 server access log objects"
+}
+
+variable "logging_target_prefix" {
+  type        = string
+  default     = ""
+  description = "A prefix for all log object keys"
+}
