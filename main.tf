@@ -60,6 +60,23 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
       days_after_initiation = var.abort_incomplete_multipart_upload_days
     }
   }
+
+  # Optional extra prefix-scoped expiration rules (default: none)
+  dynamic "rule" {
+    for_each = var.additional_lifecycle_rules
+    content {
+      id     = rule.value.id
+      status = rule.value.enabled ? "Enabled" : "Disabled"
+
+      filter {
+        prefix = rule.value.prefix
+      }
+
+      expiration {
+        days = rule.value.expiration_days
+      }
+    }
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "this" {
