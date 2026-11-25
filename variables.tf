@@ -169,6 +169,17 @@ variable "abort_incomplete_multipart_upload_days" {
   description = "Maximum time (in days) that you want to allow multipart uploads to remain in progress"
 }
 
+variable "additional_lifecycle_rules" {
+  type = list(object({
+    id              = string
+    prefix          = string
+    expiration_days = number
+    enabled         = optional(bool, true)
+  }))
+  default     = []
+  description = "Extra prefix-scoped lifecycle rules that expire current objects after expiration_days. Added alongside the default rule."
+}
+
 variable "lifecycle_tags" {
   type        = map(string)
   description = "Tags filter. Used to manage object lifecycle events"
